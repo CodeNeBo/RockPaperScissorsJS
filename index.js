@@ -1,5 +1,20 @@
 console.log("WELLCOME TO THE EPIC ROCK PAPER SCISSORS BATTLE!")
 
+let body = document.querySelector("body");
+
+let rockButt = document.createElement('button');
+rockButt.innerHTML = "Rock";
+document.body.appendChild(rockButt);
+
+let paperButt = document.createElement('button');
+paperButt.innerHTML = "Paper";
+document.body.appendChild(paperButt);
+
+let scissorsButt = document.createElement('button');
+scissorsButt.innerHTML = "Scissors";
+document.body.appendChild(scissorsButt);
+
+
 function getComputerChoise() {
     let choices = ['rock', 'paper', 'scissors']
     return choices[Math.floor(Math.random() * choices.length)]
@@ -54,4 +69,8 @@ function play (totalRounds = 5) {
     }
 }
 
-let body = document.querySelector("body");
+// buttons.forEach(button =>{
+//     button.addEventListener('click', function(){
+//         playRound(button.value)
+//     })
+// })
