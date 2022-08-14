@@ -1,11 +1,3 @@
-// TODO 
-// 1. DONE Write a func that starts the game 
-// 2. DONE Write a func that makes player to choose the fighter 
-// 3. DONE Write a func that makes comp choose the fighter 
-// 4. DONE Write a func that evaluates the fighters and choose a winner 
-// 5. DONE Write a func that counts who win 
-// 6. Fix bug where nothing happens after player picks his fighter 
-
 console.log("WELLCOME TO THE EPIC ROCK PAPER SCISSORS BATTLE!")
 
 function getComputerChoise() {
@@ -61,3 +53,5 @@ function play (totalRounds = 5) {
         console.log('You won ' + playerScore + ' out of ' + roundsPlayed + ' rounds. You lost!')
     }
 }
+
+let body = document.querySelector("body");
