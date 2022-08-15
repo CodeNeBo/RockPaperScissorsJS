@@ -1,4 +1,5 @@
-console.log("WELLCOME TO THE EPIC ROCK PAPER SCISSORS BATTLE!")
+let playerScore = 0;
+let computerScore = 0;
 
 let body = document.querySelector("body");
 
@@ -6,69 +7,60 @@ let buttons = document.createElement('div');
 buttons.className = "buttons"
 document.body.appendChild(buttons);
 
-let rockButt = document.createElement('button');
-rockButt.innerHTML = "Rock";
+let rockButt = document.createElement("INPUT");
+rockButt.setAttribute("type", "button");
+rockButt.setAttribute("value", "rock");
 buttons.appendChild(rockButt);
 
-let paperButt = document.createElement('button');
-paperButt.innerHTML = "Paper";
+let paperButt = document.createElement("INPUT");
+paperButt.setAttribute("type", "button");
+paperButt.setAttribute("value", "paper");
 buttons.appendChild(paperButt);
 
-let scissorsButt = document.createElement('button');
-scissorsButt.innerHTML = "Scissors";
+let scissorsButt = document.createElement("INPUT");
+scissorsButt.setAttribute("type", "button");
+scissorsButt.setAttribute("value", "scissors");
 buttons.appendChild(scissorsButt);
 
+const btn = document.querySelectorAll('input');
 
 function getComputerChoise() {
     let choices = ['rock', 'paper', 'scissors']
     return choices[Math.floor(Math.random() * choices.length)]
-}
-
-function playRound (playerSelection, computerSelection) {
-    let playerPoints = 0; 
-
-    if ((playerSelection == 'rock' && computerSelection == 'scissors') || 
-    (playerSelection == 'paper' && computerSelection == 'rock') || 
-    (playerSelection == 'scissors' && computerSelection == 'paper')) {
-        playerPoints = 1;
-        console.log('You win! ' + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ' beats ' + computerSelection + '!')
-    } else {
-        computerPoints = 1;
-        console.log('You lose! ' + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + ' beats ' + playerSelection + '!')
-    }
-    return playerPoints;
 };
 
-function play (totalRounds = 5) {
-    let playerScore = 0; 
-    let roundsPlayed = 0;
+function playRound (playerSelection) {
+    let computerSelection = getComputerChoise(); 
+    let result = "";
 
-    while (roundsPlayed < totalRounds) {
-        let playerSelection = prompt("Rock, Paper or Scissors? Choose your fighter!");
-        playerSelection = playerSelection.toLowerCase();
-        if ((playerSelection != 'rock') &&
-           (playerSelection != 'paper') &&
-           (playerSelection != 'scissors')) 
-        {continue};
-        
-        let computerSelection = getComputerChoise();
+    
+    if ((playerSelection == 'rock' && computerSelection == 'scissors') || 
+        (playerSelection == 'paper' && computerSelection == 'rock') || 
+        (playerSelection == 'scissors' && computerSelection == 'paper')) {
+            playerScore += 1;
+            console.log('You win! ' + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ' beats ' + computerSelection + '!')
 
-        if (playerSelection == computerSelection) {
-            console.log("You both picked " + playerSelection + "... It's a tie!");
-            continue
+            if (playerScore == 5){
+                console.log("Congratulations! You won! Press any button to play again.")
+                playerScore = 0; 
+                computerScore = 0;
+            }
+    } else if (playerSelection == computerSelection) {
+        console.log("You both picked " + playerSelection + "... It's a tie!");
+    } else {
+        computerScore += 1; 
+        console.log('You lose! ' + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + ' beats ' + playerSelection + '!')
+
+        if (computerScore == 5){
+            console.log("You lost! Press any button to play again.")
+            playerScore = 0; 
+            computerScore = 0;
         }
+    }
+};
 
-        playerScore += playRound(playerSelection, computerSelection)
-        roundsPlayed++
-    }
-
-    if (playerScore > (roundsPlayed / 2)) {
-        console.log('You won ' + playerScore + ' out of ' + roundsPlayed + ' rounds. You win!')
-    }
-    else if (playerScore == (roundsPlayed / 2)) {
-        console.log('You won ' + playerScore + ' out of ' + roundsPlayed + ' rounds. You tied.')
-    }
-    else {
-        console.log('You won ' + playerScore + ' out of ' + roundsPlayed + ' rounds. You lost!')
-    }
-}
+btn.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
